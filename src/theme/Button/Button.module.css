@@ -1,0 +1,294 @@
+.button {
+  --button-padding-h: 1.4em;
+  --button-padding-v: 0.8em;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 1;
+  padding: var(--button-padding-v) var(--button-padding-h);
+  position: relative;
+  color: var(--c-p);
+  display: flex;
+  align-items: center;
+  transition: all 200ms ease-in-out;
+  border-radius: 0.2em;
+
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.bkg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  background-color: var(--c-primary);
+  opacity: 0.8;
+  will-change: opacity;
+  transition: opacity 200ms;
+  border-radius: 0.2em;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  height: 1em;
+  width: 100%;
+  padding: 0 var(--button-padding-h);
+  color: #fff;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 200ms ease-in-out;
+  pointer-events: none;
+  display: flex;
+  gap: 0.5em;
+
+  &:not(:has(.progress)) {
+    justify-content: center;
+  }
+}
+
+.loaderIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.buttonIconRight .loader {
+  flex-direction: row-reverse;
+}
+
+.progress {
+  width: 100%;
+}
+
+.icon {
+  color: #fff;
+  will-change: opacity;
+  transition: opacity 200ms ease-in-out;
+  display: block;
+  pointer-events: none;
+
+  &.iconLeft {
+    margin-right: 0.6em;
+  }
+
+  &.iconRight {
+    margin-left: 0.6em;
+  }
+}
+
+.content {
+  position: relative;
+  //z-index: 1;
+  color: #fff;
+  opacity: 1;
+  will-change: opacity;
+  transition: opacity 200ms ease-in-out;
+  white-space: nowrap;
+}
+
+/* States */
+
+.button:hover {
+  .bkg {
+    opacity: 1;
+  }
+}
+
+.button:focus {
+  outline: none;
+  @mixin a11y-focus;
+}
+
+/* Variants */
+
+.buttonLayoutEmpty,
+.buttonLayoutOutline {
+  .bkg {
+    background-color: transparent;
+    opacity: 0.7;
+    border: none;
+  }
+
+  .content,
+  .icon,
+  .loader {
+    color: currentColor;
+  }
+
+  .icon {
+    transform: scale(1.3);
+  }
+}
+
+.buttonLayoutOutline {
+  border: 1px solid currentColor;
+}
+
+.buttonIsRound {
+  border-radius: 5rem;
+
+  .bkg {
+    border-radius: 5rem;
+  }
+}
+
+.buttonIsDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.buttonIsLoading {
+  .loader {
+    opacity: 1;
+  }
+
+  .content,
+  .icon {
+    opacity: 0;
+  }
+}
+
+.buttonHasNoText {
+  padding: 0.5em;
+
+  .iconLeft {
+    margin-right: 0;
+  }
+
+  .iconRight {
+    margin-left: 0;
+  }
+}
+
+.buttonColorPrimary {
+  color: var(--c-primary);
+}
+
+.buttonOnlyIconMobile.buttonHasIcon {
+  @mixin mobile {
+    .content {
+      display: none;
+    }
+
+    .icon {
+      margin: 0;
+    }
+  }
+}
+
+.buttonNoPadding {
+  padding: 0;
+}
+
+.buttonSizeSmall {
+  font-size: 0.65rem;
+}
+
+.buttonSizeBig {
+  font-size: 1.8rem;
+}
+
+.pulsate {
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    outline: 5px solid var(--c-primary);
+    animation: pulsate 1s infinite;
+    z-index: -1;
+  }
+
+  &.buttonIsRound::before {
+    border-radius: 5rem;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(0.9, 0.9);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.075, 1.175);
+    opacity: 0;
+  }
+}
+
+/*
+
+
+.notext {
+  padding: 0.5em;
+
+  .iconLeft {
+    margin-right: 0;
+  }
+
+  .iconRight {
+    margin-left: 0;
+  }
+}
+
+
+
+
+
+
+
+&--color-primary {
+  color: var(--c-primary);
+}
+
+/*
+
+
+  &__loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 1em;
+    height: 1em;
+    color: #fff;
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 200ms ease-in-out;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    opacity: 1;
+    will-change: opacity;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &--loading {
+    .button {
+      &__loader {
+        opacity: 1;
+      }
+
+      &__content,
+      &__icon {
+        opacity: 0;
+      }
+    }
+  }
+
+  &--color-primary {
+    color: var(--c-primary);
+  }
+}
+*/

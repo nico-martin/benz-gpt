@@ -1,0 +1,37 @@
+.root {
+  --playground-height: 600px;
+  --playground-element-width: calc(var(--playground-height) * 0.6);
+  --transition-duration: 1000ms;
+}
+
+.header,
+.playground {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.header {
+  z-index: 100;
+  transition: var(--transition-duration) ease-in-out transform;
+}
+
+.playground {
+  opacity: 0;
+  transition: var(--transition-duration) ease-in-out opacity
+    calc(var(--transition-duration) / 2);
+  transform: translateX(-50%) translateY(-40%);
+  height: 600px;
+}
+
+.introDone {
+  .header {
+    transform: translateX(-50%)
+      translateY(calc((var(--playground-height) * 0.5 + 50%) * -1));
+  }
+
+  .playground {
+    opacity: 1;
+  }
+}

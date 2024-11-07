@@ -1,0 +1,72 @@
+.root {
+}
+
+.button {
+  background-color: var(--c-primary);
+  font-size: 2rem;
+  width: 7em;
+  height: 7em;
+  color: var(--c-white);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 200ms ease-in-out;
+  position: relative;
+  overflow: visible;
+
+  &:hover {
+    background-color: var(--c-primary-dark);
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    pointer-events: none;
+
+    .loader {
+      opacity: 1;
+    }
+  }
+}
+
+.loader {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 0.02em;
+  animation:
+    loader-dash 2s ease infinite,
+    loader-rotate 2s linear infinite;
+  position: absolute;
+  bottom: -1em;
+  right: -1em;
+  left: -1em;
+  top: -1em;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+@keyframes loader-dash {
+  0% {
+    stroke-dasharray: 1, 95;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 85, 95;
+    stroke-dashoffset: -25;
+  }
+
+  100% {
+    stroke-dasharray: 85, 95;
+    stroke-dashoffset: -93;
+  }
+}
+
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,22 @@
+.root {
+  font-size: var(--fs-xbig);
+  width: 20em;
+  max-width: 90%;
+}
+
+.h1 {
+  font-weight: 300;
+  font-size: var(--fs-xbig);
+}
+
+.title {
+  font-weight: bold;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    -90deg,
+    var(--c-grad-from),
+    var(--c-grad-to)
+  );
+  -webkit-background-clip: text;
+  text-decoration: none;
+}

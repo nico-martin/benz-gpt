@@ -1,0 +1,21 @@
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2rem;
+}
+
+.item {
+  border-radius: 5px;
+  border: 1px solid var(--c-p);
+  padding: 0.5em 1em;
+  max-width: 95%;
+}
+
+.itemUser {
+  align-self: flex-end;
+  background-color: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+}

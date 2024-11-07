@@ -1,0 +1,9 @@
+.root {
+  color: var(--c-primary);
+}
+
+.svg {
+  width: var(--playground-element-width);
+  height: var(--playground-element-width);
+  transform: rotate(-90deg);
+}
