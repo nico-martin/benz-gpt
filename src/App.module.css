@@ -1,6 +1,6 @@
 .root {
   --playground-height: 600px;
-  --playground-element-width: calc(var(--playground-height) * 0.6);
+  --playground-element-width: 400px;
   --transition-duration: 1000ms;
 }
 

@@ -1,9 +1,92 @@
 .root {
+  --wheel-turning-speed-direction: normal;
+  --wheel-turning-speed: 1000ms;
+  --direction: 0deg;
+
   color: var(--c-primary);
+  position: relative;
+  animation: shake var(--wheel-turning-speed) ease-in-out infinite;
+  rotate: var(--direction);
+  transition: ease-in-out 300ms rotate;
 }
 
 .svg {
   width: var(--playground-element-width);
   height: var(--playground-element-width);
   transform: rotate(-90deg);
+}
+
+.tire {
+  position: absolute;
+  width: 9%;
+  height: 17%;
+  border-radius: 15%;
+  overflow: hidden;
+
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    border-radius: 15%;
+    background-color: var(--c-border);
+    animation: wheelTurning var(--wheel-turning-speed) infinite ease-in-out
+      var(--wheel-turning-speed-direction);
+    left: 0;
+    top: 0;
+  }
+
+  &:before {
+    animation-delay: calc(var(--wheel-turning-speed) / 2);
+  }
+}
+
+@keyframes wheelTurning {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 90%;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-0.25%);
+  }
+  50% {
+    transform: translateX(0.25%);
+  }
+  75% {
+    transform: translateX(-0.25%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.tireFL {
+  left: 21.5%;
+  top: 17%;
+}
+
+.tireFR {
+  left: 69.2%;
+  top: 17%;
+}
+
+.tireBL {
+  left: 20.5%;
+  top: 71%;
+  width: 10.5%;
+}
+
+.tireBR {
+  left: 69%;
+  top: 71%;
+  width: 10.5%;
 }
