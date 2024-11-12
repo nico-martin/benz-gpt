@@ -43,7 +43,8 @@
     translate: -50% calc((var(--playground-height) * 0.5 + 50%) * -1);
   }
 
-  .playground {
+  .playground,
+  .footer {
     opacity: 1;
   }
 }
@@ -56,4 +57,16 @@
   width: var(--sidebar-width);
   translate: var(--sidebar-translate-x) 0;
   transition: translate var(--sidebar-transition-duration) ease-in-out;
+}
+
+.footer {
+  position: fixed;
+  bottom: 1em;
+  left: 50%;
+  opacity: 0;
+  translate: var(--playground-translate-x) 0;
+  transition:
+    var(--sidebar-transition-duration) ease-in-out translate,
+    var(--header-transition-duration) ease-in-out opacity
+      calc(var(--header-transition-duration) / 2);
 }

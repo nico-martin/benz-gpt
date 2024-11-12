@@ -8,6 +8,7 @@ import Header from '@app/Header.tsx';
 import Playground from '@app/Playground.tsx';
 import Sidebar from '@app/Sidebar.tsx';
 import useBrain from './useBrain.ts';
+import Footer from '@app/Footer.tsx';
 
 const SIDEBAR_WIDTH = 400;
 
@@ -57,6 +58,7 @@ const App: React.FC = () => {
         sidebarOpen={sidebarOpen}
         toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
       />
+      <Footer className={styles.footer} />
     </div>
   );
 };

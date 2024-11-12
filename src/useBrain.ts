@@ -97,6 +97,11 @@ const useBrain = (
           function: 'turn',
           parameter: -45,
         },
+        {
+          message: 'driving straight',
+          function: 'turn',
+          parameter: 0,
+        },
       ],
       run: (direction: number) => {
         const boundryDirection =

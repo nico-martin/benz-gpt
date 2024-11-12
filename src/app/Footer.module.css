@@ -1,0 +1,21 @@
+.root {
+  text-align: center;
+  color: var(--c-border-light);
+
+  p {
+    font-size: var(--fs-xsmall);
+  }
+
+  p + p {
+    margin-top: 0.5em;
+  }
+
+  a {
+    opacity: 0.5;
+    transition: 200ms ease-in-out opacity;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

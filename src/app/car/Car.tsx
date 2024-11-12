@@ -50,31 +50,33 @@ const Car: React.FC<{ className?: string; speed: number; turn: number }> = ({
   return (
     <div className={cn(className, styles.root)} ref={wrapperRef}>
       <div
-        className={cn(styles.carWrapper, {
-          [styles.carWrapperForward]: speed > 0,
-          [styles.carWrapperBackward]: speed < 0,
+        className={cn(styles.carOuterWrapper, {
+          [styles.carOuterWrapperForward]: speed > 0,
+          [styles.carOuterWrapperBackward]: speed < 0,
         })}
       >
-        {Array(4)
-          .fill('')
-          .map((_e, i) => (
-            <div key={i} className={cn(styles.tire)} />
-          ))}
-        <div className={cn(styles.rearWind)}>
-          {Array(5)
+        <div className={cn(styles.carWrapper)}>
+          {Array(4)
             .fill('')
             .map((_e, i) => (
-              <div key={i} className={cn(styles.rearWindElement)} />
+              <div key={i} className={cn(styles.tire)} />
             ))}
+          <div className={cn(styles.rearWind)}>
+            {Array(5)
+              .fill('')
+              .map((_e, i) => (
+                <div key={i} className={cn(styles.rearWindElement)} />
+              ))}
+          </div>
+          <div className={cn(styles.frontWind)}>
+            {Array(7)
+              .fill('')
+              .map((_e, i) => (
+                <div key={i} className={cn(styles.frontWindElement)} />
+              ))}
+          </div>
+          <CarSvg className={styles.svg} />
         </div>
-        <div className={cn(styles.frontWind)}>
-          {Array(7)
-            .fill('')
-            .map((_e, i) => (
-              <div key={i} className={cn(styles.frontWindElement)} />
-            ))}
-        </div>
-        <CarSvg className={styles.svg} />
       </div>
       <p className={styles.meta}>
         <span className={styles.metaInformation}>

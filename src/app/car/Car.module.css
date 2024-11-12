@@ -4,23 +4,23 @@
   --direction: 0deg;
 }
 
+.carOuterWrapper {
+  transform: rotate(var(--direction)) translateY(0);
+  transition: ease-in-out 300ms transform;
+
+  &.carOuterWrapperForward {
+    transform: rotate(var(--direction)) translateY(-20px);
+  }
+
+  &.carOuterWrapperBackward {
+    transform: rotate(var(--direction)) translateY(20px);
+  }
+}
+
 .carWrapper {
   color: var(--c-primary);
   position: relative;
   animation: shake var(--wheel-turning-speed) ease-in-out infinite;
-  rotate: var(--direction);
-  transition:
-    ease-in-out 300ms rotate,
-    ease-in-out 300ms top;
-  will-change: top;
-  top: 0;
-
-  &.carWrapperForward {
-    top: -20px;
-  }
-  &.carWrapperBackward {
-    top: 20px;
-  }
 }
 
 .svg {
@@ -143,7 +143,7 @@
   }
 }
 
-.carWrapperForward {
+.carOuterWrapperForward {
   .rearWind {
     opacity: 1;
     .rearWindElement {
@@ -187,7 +187,7 @@
   }
 }
 
-.carWrapperBackward {
+.carOuterWrapperBackward {
   .frontWind {
     opacity: 1;
     .frontWindElement {
