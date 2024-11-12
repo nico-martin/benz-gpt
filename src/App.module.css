@@ -1,7 +1,9 @@
 .root {
   --playground-height: 600px;
   --playground-element-width: 400px;
-  --transition-duration: 1000ms;
+  --header-transition-duration: 1000ms;
+  --sidebar-transition-duration: 200ms;
+  --playground-translate-x: calc(-50% - var(--app-translate-x));
 }
 
 .header,
@@ -9,29 +11,49 @@
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  translate: -50% -50%;
 }
 
 .header {
   z-index: 100;
-  transition: var(--transition-duration) ease-in-out transform;
+  margin-left: 0;
+  transition:
+    var(--header-transition-duration) ease-in-out translate,
+    var(--sidebar-transition-duration) ease-in-out margin-left;
 }
 
 .playground {
   opacity: 0;
-  transition: var(--transition-duration) ease-in-out opacity
-    calc(var(--transition-duration) / 2);
-  transform: translateX(-50%) translateY(-40%);
+  transition:
+    var(--header-transition-duration) ease-in-out opacity
+      calc(var(--header-transition-duration) / 2),
+    var(--sidebar-transition-duration) ease-in-out translate;
+  translate: var(--playground-translate-x) -40%;
   height: 600px;
+}
+
+.root.sidebarOpen {
+  .header {
+    margin-left: calc(var(--app-translate-x) * -1);
+  }
 }
 
 .introDone {
   .header {
-    transform: translateX(-50%)
-      translateY(calc((var(--playground-height) * 0.5 + 50%) * -1));
+    translate: -50% calc((var(--playground-height) * 0.5 + 50%) * -1);
   }
 
   .playground {
     opacity: 1;
   }
+}
+
+.sidebar {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  translate: var(--sidebar-translate-x) 0;
+  transition: translate var(--sidebar-transition-duration) ease-in-out;
 }

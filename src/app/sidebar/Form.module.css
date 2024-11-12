@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  border-top: 1px solid var(--c-border);
+  width: 100%;
+}
+
+.textarea {
+  background-color: var(--c-bkg);
+  border: 1px solid var(--c-border);
+  width: 100%;
+  border-radius: 0.2em;
+  height: 5em;
+  padding: 1em;
+  color: var(--c-p);
+}
+
+.button {
+  width: 100%;
+  justify-content: center;
+}

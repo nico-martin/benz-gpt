@@ -4,19 +4,17 @@ import styles from './Button.module.css';
 import cn from '@utils/classnames';
 
 interface ButtonProps {
-  children?: React.JSX.Element | React.JSX.Element[] | string;
+  children?: React.ReactElement | string | Array<React.ReactElement | string>;
   className?: string;
   classNameIcon?: string;
   onClick?: () => void;
-  layout?: 'solid' | 'empty' | 'outline';
-  round?: boolean;
+  onMouseDown?: () => void;
+  onMouseUp?: () => void;
   icon?: IconName;
   iconRight?: boolean;
   iconCircle?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  color?: 'black' | 'primary';
-  onlyIconMobile?: boolean;
   progress?: number;
   noPadding?: boolean;
   size?: 'small' | 'medium' | 'big';
@@ -34,16 +32,14 @@ const Button: React.ForwardRefExoticComponent<ButtonProps> = React.forwardRef<
       className = '',
       classNameIcon = '',
       onClick = () => {},
-      layout = 'solid',
-      round = false,
+      onMouseDown = () => {},
+      onMouseUp = () => {},
       icon = null,
       iconRight = false,
       iconCircle = false,
       loading = false,
       progress = null,
       disabled = false,
-      color = 'black',
-      onlyIconMobile = false,
       noPadding = false,
       size = 'medium',
       pulsate = false,
@@ -55,15 +51,10 @@ const Button: React.ForwardRefExoticComponent<ButtonProps> = React.forwardRef<
       <button
         {...props}
         disabled={disabled || loading || progress !== null}
-        className={cn(className, styles.button, `button--color-${color}`, {
-          [styles.buttonLayoutEmpty]: layout === 'empty',
-          [styles.buttonLayoutOutline]: layout === 'outline',
-          [styles.buttonIsRound]: round,
+        className={cn(className, styles.button, {
           [styles.buttonIsDisabled]: disabled,
           [styles.buttonIsLoading]: loading || progress !== null,
           [styles.buttonHasNoText]: children === '',
-          [styles.buttonColorPrimary]: color === 'primary',
-          [styles.buttonOnlyIconMobile]: onlyIconMobile,
           [styles.buttonHasIcon]: Boolean(icon),
           [styles.buttonIconRight]: Boolean(iconRight),
           [styles.buttonNoPadding]: noPadding,
@@ -72,6 +63,8 @@ const Button: React.ForwardRefExoticComponent<ButtonProps> = React.forwardRef<
           [styles.pulsate]: pulsate,
         })}
         onClick={() => onClick()}
+        onMouseDown={() => onMouseDown()}
+        onMouseUp={() => onMouseUp()}
         ref={ref}
       >
         <div className={styles.bkg} />

@@ -2,12 +2,25 @@
   --wheel-turning-speed-direction: normal;
   --wheel-turning-speed: 1000ms;
   --direction: 0deg;
+}
 
+.carWrapper {
   color: var(--c-primary);
   position: relative;
   animation: shake var(--wheel-turning-speed) ease-in-out infinite;
   rotate: var(--direction);
-  transition: ease-in-out 300ms rotate;
+  transition:
+    ease-in-out 300ms rotate,
+    ease-in-out 300ms top;
+  will-change: top;
+  top: 0;
+
+  &.carWrapperForward {
+    top: -20px;
+  }
+  &.carWrapperBackward {
+    top: 20px;
+  }
 }
 
 .svg {
@@ -21,7 +34,6 @@
   width: 9%;
   height: 17%;
   border-radius: 15%;
-  overflow: hidden;
 
   &:after,
   &:before {
@@ -39,6 +51,25 @@
 
   &:before {
     animation-delay: calc(var(--wheel-turning-speed) / 2);
+  }
+
+  &:nth-child(1) {
+    left: 21.5%;
+    top: 17%;
+  }
+  &:nth-child(2) {
+    left: 69.2%;
+    top: 17%;
+  }
+  &:nth-child(3) {
+    left: 20.5%;
+    top: 71%;
+    width: 10.5%;
+  }
+  &:nth-child(4) {
+    left: 69%;
+    top: 71%;
+    width: 10.5%;
   }
 }
 
@@ -69,24 +100,112 @@
   }
 }
 
-.tireFL {
-  left: 21.5%;
-  top: 17%;
+.tire {
 }
 
-.tireFR {
-  left: 69.2%;
-  top: 17%;
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  margin-top: 5em;
 }
 
-.tireBL {
-  left: 20.5%;
-  top: 71%;
-  width: 10.5%;
+.rearWind {
+  opacity: 0;
+  transition: 300ms ease-in-out opacity;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(120%);
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  gap: 5%;
+  justify-content: center;
+
+  .rearWindElement {
+    width: 0.5%;
+    height: 1.5em;
+    background-color: var(--c-p-light);
+    scale: 0;
+    transition: 300ms ease-in-out scale;
+    transform-origin: top center;
+
+    &:nth-child(2) {
+      height: 2em;
+    }
+    &:nth-child(3) {
+      height: 2.5em;
+    }
+    &:nth-child(4) {
+      height: 2em;
+    }
+  }
 }
 
-.tireBR {
-  left: 69%;
-  top: 71%;
-  width: 10.5%;
+.carWrapperForward {
+  .rearWind {
+    opacity: 1;
+    .rearWindElement {
+      scale: 1;
+    }
+  }
+}
+
+.frontWind {
+  opacity: 0;
+  transition: 300ms ease-in-out opacity;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(120%);
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  gap: 5%;
+  justify-content: center;
+  rotate: 180deg;
+
+  .frontWindElement {
+    width: 0.5%;
+    height: 1.5em;
+    background-color: var(--c-p-light);
+    scale: 0;
+    transition: 300ms ease-in-out scale;
+    transform-origin: top center;
+
+    &:nth-child(2) {
+      height: 2.2em;
+    }
+    &:nth-child(4) {
+      height: 2.2em;
+      transform: translateY(20%);
+    }
+    &:nth-child(6) {
+      height: 2.5em;
+    }
+  }
+}
+
+.carWrapperBackward {
+  .frontWind {
+    opacity: 1;
+    .frontWindElement {
+      scale: 1;
+    }
+  }
+}
+
+.metaInformation {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--c-p-light);
+
+  code {
+    padding: 0.5em 0.7em 0.4em 0.7em;
+    background-color: var(--c-bkg-light);
+    border-radius: 6px;
+    border: 1px solid var(--c-border);
+  }
 }

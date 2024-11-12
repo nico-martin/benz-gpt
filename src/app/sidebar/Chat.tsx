@@ -1,15 +1,16 @@
 import React from 'react';
 import cn from '@utils/classnames.ts';
 import styles from './Chat.module.css';
-import useLlm from '../llm/useLlm.ts';
 import showdown from 'showdown';
 import nl2br from '@utils/nl2br.ts';
+import { Message } from '../../functionCallingPromptAPI/types.ts';
 
 const showdownConverter = new showdown.Converter();
 
-const Chat: React.FC<{ className?: string }> = ({ className = '' }) => {
-  const { messages } = useLlm();
-
+const Chat: React.FC<{ className?: string; messages: Array<Message> }> = ({
+  className = '',
+  messages,
+}) => {
   return (
     <ul className={cn(className, styles.list)}>
       {messages
@@ -29,7 +30,7 @@ const Chat: React.FC<{ className?: string }> = ({ className = '' }) => {
                   nl2br(message?.parsed?.message || message.content)
                 ) +
                 (message?.parsed?.function
-                  ? `<pre>${message.parsed.function}(${message.parsed?.parameter || message.parsed?.parameter === 0 ? message.parsed?.parameter : ''})</pre>`
+                  ? `<pre>Function: ${message.parsed.function}(${message.parsed?.parameter || message.parsed?.parameter === 0 ? message.parsed?.parameter : ''})</pre>`
                   : ''),
             }}
           />

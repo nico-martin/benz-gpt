@@ -27,8 +27,10 @@ const Form: React.FC<{
         textarea.value = '';
       }}
     >
-      <textarea name="test"></textarea>
-      <Button type="submit">ask</Button>
+      <textarea className={styles.textarea} name="test"></textarea>
+      <Button type="submit" className={styles.button}>
+        ask
+      </Button>
     </form>
   );
 };

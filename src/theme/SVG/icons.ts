@@ -1,5 +1,6 @@
 /* This file was generated automatically with the ./generate.js script */
 
+import arrowRight from './icons/arrow-right.svg?react';
 import check from './icons/check.svg?react';
 import close from './icons/close.svg?react';
 import commentTextOutline from './icons/comment-text-outline.svg?react';
@@ -8,6 +9,7 @@ import downloadOutline from './icons/download-outline.svg?react';
 import download from './icons/download.svg?react';
 import eraserVariant from './icons/eraser-variant.svg?react';
 import formatFont from './icons/formatFont.svg?react';
+import forum from './icons/forum.svg?react';
 import install from './icons/install.svg?react';
 import microphoneOutline from './icons/microphone-outline.svg?react';
 import microphone from './icons/microphone.svg?react';
@@ -26,6 +28,7 @@ import viewMd from './icons/view-md.svg?react';
 import viewSplit from './icons/view-split.svg?react';
 
 export enum IconName {
+  ARROW_RIGHT = 'arrow-right',
   CHECK = 'check',
   CLOSE = 'close',
   COMMENT_TEXT_OUTLINE = 'comment-text-outline',
@@ -34,6 +37,7 @@ export enum IconName {
   DOWNLOAD = 'download',
   ERASER_VARIANT = 'eraser-variant',
   FORMATFONT = 'formatFont',
+  FORUM = 'forum',
   INSTALL = 'install',
   MICROPHONE_OUTLINE = 'microphone-outline',
   MICROPHONE = 'microphone',
@@ -53,6 +57,7 @@ export enum IconName {
 }
 
 const icons: Record<string, any> = {
+  'arrow-right': arrowRight,
   'check': check,
   'close': close,
   'comment-text-outline': commentTextOutline,
@@ -61,6 +66,7 @@ const icons: Record<string, any> = {
   'download': download,
   'eraser-variant': eraserVariant,
   'formatFont': formatFont,
+  'forum': forum,
   'install': install,
   'microphone-outline': microphoneOutline,
   'microphone': microphone,

@@ -1,9 +1,11 @@
 :root {
   --c-white: #faf6f5;
   --c-p: #fff;
+  --c-p-light: #858585;
   --c-p-hover: #f1f1f1;
   --c-bkg: #131314;
-  --c-border: rgb(62, 62, 62);
+  --c-bkg-light: #181819;
+  --c-border: rgb(48, 48, 48);
   --c-grad-from: #ff4b2b;
   --c-grad-to: #ff416c;
   --c-primary: #ff416c;

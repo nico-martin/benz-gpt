@@ -1,0 +1,37 @@
+.root {
+  background-color: var(--c-bkg-light);
+  border-left: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.toggler {
+  position: absolute;
+  translate: calc(-100% - 1em);
+  left: 0;
+  top: 1em;
+  opacity: 0.3;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: opacity 200ms ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.connect {
+  justify-self: center;
+  align-self: center;
+  padding: 2em;
+  text-align: center;
+}
+
+.form {
+  flex-shrink: 0;
+}
+
+.chat {
+  flex: 1;
+  overflow-y: auto;
+}
