@@ -6,10 +6,11 @@
   --c-bkg: #131314;
   --c-bkg-light: #181819;
   --c-border: rgb(48, 48, 48);
+  --c-border-light: rgb(104, 103, 103);
   --c-grad-from: #ff4b2b;
   --c-grad-to: #ff416c;
   --c-primary: #ff416c;
   --c-feedback: #5480cb;
-  --c-feedback-error: #722121;
+  --c-feedback-error: #c13838;
   --c-feedback-success: #206920;
 }

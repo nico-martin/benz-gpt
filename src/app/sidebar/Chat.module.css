@@ -8,9 +8,21 @@
 
 .item {
   border-radius: 5px;
-  border: 1px solid var(--c-p);
-  padding: 0.5em 1em;
+  border: 1px solid var(--c-border-light);
+  padding: 1em;
   max-width: 95%;
+  font-size: var(--fs-small);
+
+  pre {
+    font-size: var(--fs-xsmall);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 1em 0 0 0;
+  }
+
+  pre.preError {
+    color: var(--c-feedback-error);
+  }
 }
 
 .itemUser {

@@ -2,7 +2,6 @@ import { createRoot } from 'react-dom/client';
 import React from 'react';
 
 import styles from './App.module.css';
-import LlmContextProvider from './llm/LlmContextProvider.tsx';
 import cn from '@utils/classnames.ts';
 import WebBluetoothCarContextProvider from './webBluetooth/WebBluetoothCarContextProvider.tsx';
 import Header from '@app/Header.tsx';
@@ -17,7 +16,7 @@ const App: React.FC = () => {
   const [introDone, setIntroDone] = React.useState<boolean>(false);
   const [speed, setSpeed] = React.useState<number>(0);
   const [turn, setTurn] = React.useState<number>(0);
-  const [sidebarOpen, setSidebarOpen] = React.useState<boolean>(true);
+  const [sidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
 
   const brain = useBrain(setSpeed, setTurn);
 
@@ -63,9 +62,7 @@ const App: React.FC = () => {
 };
 
 createRoot(document.getElementById('root')!).render(
-  <LlmContextProvider>
-    <WebBluetoothCarContextProvider>
-      <App />
-    </WebBluetoothCarContextProvider>
-  </LlmContextProvider>
+  <WebBluetoothCarContextProvider>
+    <App />
+  </WebBluetoothCarContextProvider>
 );

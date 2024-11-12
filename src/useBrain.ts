@@ -41,7 +41,7 @@ const useBrain = (
 
   const setup = async (callback: any = () => {}): Promise<void> => {
     setStatus(Status.LOADING);
-    llmInstance.addFunction({
+    llmInstance.registerFunction<number>({
       name: 'move',
       description: 'Sets the new speed of the car',
       parameter: {
@@ -69,9 +69,14 @@ const useBrain = (
           parameter: -100,
         },
       ],
+      run: (speed) => {
+        const boundrySpeed = speed < -100 ? -100 : speed > 100 ? 100 : speed;
+        adjustSpeed(boundrySpeed);
+        return boundrySpeed;
+      },
     });
 
-    llmInstance.addFunction({
+    llmInstance.registerFunction<number>({
       name: 'turn',
       description: 'Change the direction of the car',
       parameter: {
@@ -93,6 +98,12 @@ const useBrain = (
           parameter: -45,
         },
       ],
+      run: (direction: number) => {
+        const boundryDirection =
+          direction < -90 ? -90 : direction > 90 ? 90 : direction;
+        adjustDirection(boundryDirection);
+        return boundryDirection;
+      },
     });
     await llmInstance.initializeSession(
       callback,
@@ -101,34 +112,8 @@ const useBrain = (
     setStatus(Status.READY);
   };
 
-  const functions = {
-    move: (speed: number) => {
-      if (speed < -100) {
-        adjustSpeed(-100);
-      } else if (speed > 100) {
-        adjustSpeed(100);
-      } else {
-        adjustSpeed(speed);
-      }
-    },
-    turn: (angle: number) => {
-      if (angle < -90) {
-        adjustDirection(-90);
-      } else if (angle > 90) {
-        adjustDirection(90);
-      } else {
-        adjustDirection(angle);
-      }
-    },
-  };
-
-  const generateAnswer = async (text: string) => {
-    const message = await llmInstance.generate(text);
-    if (message?.parsed?.function && message.parsed.function in functions) {
-      functions[message.parsed.function](message.parsed.parameter);
-    }
-    return message;
-  };
+  const generateAnswer = async (text: string) =>
+    await llmInstance.generate(text);
 
   const createListener = (): Listener => {
     const speechToText = new SpeechToText();

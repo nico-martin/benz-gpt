@@ -31,6 +31,9 @@ const Chat: React.FC<{ className?: string; messages: Array<Message> }> = ({
                 ) +
                 (message?.parsed?.function
                   ? `<pre>Function: ${message.parsed.function}(${message.parsed?.parameter || message.parsed?.parameter === 0 ? message.parsed?.parameter : ''})</pre>`
+                  : '') +
+                (message?.error
+                  ? `<pre class="${styles.preError}">${message.error})</pre>`
                   : ''),
             }}
           />

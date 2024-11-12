@@ -29,7 +29,7 @@ const Form: React.FC<{
     >
       <textarea className={styles.textarea} name="test"></textarea>
       <Button type="submit" className={styles.button}>
-        ask
+        Send prompt
       </Button>
     </form>
   );
