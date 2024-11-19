@@ -61,10 +61,10 @@ class FunctionCallingPromptAPI extends EventTarget {
     systemMessage: string = ''
   ): Promise<void> => {
     const systemPrompt = `${systemMessage}
-You are friendly and helpful and you always answer in the following, valid JSON format:
+You are friendly and helpful and you always answer in the following, valid JSON format and keep your answers short:
 
 {
-  "message": string // describe what you are doing next
+  "message": string // describe what you are doing next but keep it short
   "function": string // one of the functions above
   "parameter": string | number // the parameter used for the function
 }
@@ -80,7 +80,7 @@ parameter: ${func.parameter.name} // ${func.parameter.type} - ${func.parameter.d
   .join('\n\n')}
 
 EXAMPLES:
-these are just examples. Choose the paramaters that you thik are best for the situation.
+these are just examples. Choose the paramaters that you think are best for the situation.
 ${this.functions
   .map((func) =>
     func.examples
@@ -102,7 +102,9 @@ ${this.functions
   "parameter": null
 }
     `;
-    this.session = await ai.languageModel.create({
+
+    // @ts-ignore
+    this.session = await self.ai.languageModel.create({
       systemPrompt,
     });
 
@@ -172,6 +174,7 @@ ${this.functions
       ];
       this.busy = false;
       console.error(e);
+      // @ts-ignore
       throw new Error('Error parsing message', e);
     }
   };
