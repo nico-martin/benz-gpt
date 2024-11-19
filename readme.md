@@ -3,9 +3,9 @@
 # BenzGPT
 BenzGPT is am AI Agent that uses the [PromptAPI](https://github.com/explainers-by-googlers/prompt-api) to understand a given command and then decide what it should do next. Should it just chat? Or should it move?
 
-More than that it also uses the WebSpeechAPI to transcribe spoken words into text and then uses the SpeechSynthesisAPI to speak back to the user. So you can actually talk to BenzGPT!
+More than that it also uses the [WebSpeechAPI](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) to transcribe spoken words into text and then uses the [SpeechSynthesisAPI](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis) to speak back to the user. So you can actually talk to BenzGPT!
 
-To round it all off, of course, it's not just a virtual conversation. A toy car can also be controlled via WebBluetooth.
+To round it all off, of course, it's not just a virtual conversation. A toy car can also be controlled via [WebBluetooth](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API).
 
 ## Function calling
 The core of BenzGPT is the [FunctionCallingPromptAPI](https://github.com/nico-martin/benz-gpt/blob/main/src/functionCallingPromptAPI/FunctionCallingPromptAPI.ts). It is an abstraction layer to convert any LLM (in this case the [PromptAPI](https://github.com/explainers-by-googlers/prompt-api)) into a function calling API.
