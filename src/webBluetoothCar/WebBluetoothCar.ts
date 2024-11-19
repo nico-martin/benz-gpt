@@ -40,7 +40,9 @@ class WebBluetoothCar extends EventTarget {
     return () => this.removeEventListener('valueChanged', listener);
   };
 
-  public connect = async (serviceUUid: string, characteristicUUid: string) => {
+  public connect = async () => {
+    const serviceUUid = '057b4ab6-2c6a-4138-b8e1-3529701d3f7a';
+    const characteristicUUid = '41fd3aec-618c-48f6-901c-71e42ac4bf47';
     const device = await navigator.bluetooth.requestDevice({
       filters: [{ services: [serviceUUid] }],
       optionalServices: [serviceUUid],

@@ -79,7 +79,13 @@ const Playground: React.FC<{
           </Button>
         )}
       </div>
-      <Car className={cn(styles.car)} speed={speed} turn={turn} />
+      <Car
+        className={cn(styles.car)}
+        speed={speed}
+        turn={turn}
+        bleCarConnected={brain.bleCarConnected}
+        connectBleCar={brain.connectBleCar}
+      />
     </div>
   );
 };

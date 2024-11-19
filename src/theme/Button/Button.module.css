@@ -18,6 +18,10 @@
   &:disabled {
     pointer-events: none;
   }
+
+  &.buttonHasIcon {
+    --button-padding-h: 1em;
+  }
 }
 
 .bkg {

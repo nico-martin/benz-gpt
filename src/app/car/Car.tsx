@@ -3,11 +3,20 @@ import styles from './Car.module.css';
 import CarSvg from '@app/car/CarSvg.tsx';
 import React from 'react';
 import mapRange from '@utils/mapRange.ts';
+import { Button, IconName } from '@theme';
 
-const Car: React.FC<{ className?: string; speed: number; turn: number }> = ({
+const Car: React.FC<{
+  className?: string;
+  speed: number;
+  turn: number;
+  bleCarConnected: boolean;
+  connectBleCar: () => void;
+}> = ({
   className = '',
   speed = 0,
   turn = 0,
+  bleCarConnected,
+  connectBleCar,
 }) => {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   /*const carSize: number = React.useMemo(() => {
@@ -85,6 +94,14 @@ const Car: React.FC<{ className?: string; speed: number; turn: number }> = ({
         <span className={styles.metaInformation}>
           Direction: <code>{turn}°</code>
         </span>
+        <Button
+          size="small"
+          icon={IconName.MICROPHONE_OUTLINE}
+          onClick={() => connectBleCar()}
+          disabled={bleCarConnected}
+        >
+          {bleCarConnected ? 'connected' : 'connect'}
+        </Button>
       </p>
     </div>
   );

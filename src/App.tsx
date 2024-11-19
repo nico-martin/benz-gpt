@@ -3,7 +3,6 @@ import React from 'react';
 
 import styles from './App.module.css';
 import cn from '@utils/classnames.ts';
-import WebBluetoothCarContextProvider from './webBluetooth/WebBluetoothCarContextProvider.tsx';
 import Header from '@app/Header.tsx';
 import Playground from '@app/Playground.tsx';
 import Sidebar from '@app/Sidebar.tsx';
@@ -63,8 +62,4 @@ const App: React.FC = () => {
   );
 };
 
-createRoot(document.getElementById('root')!).render(
-  <WebBluetoothCarContextProvider>
-    <App />
-  </WebBluetoothCarContextProvider>
-);
+createRoot(document.getElementById('root')!).render(<App />);

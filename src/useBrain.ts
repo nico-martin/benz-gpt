@@ -3,6 +3,7 @@ import SpeechToText from '@utils/SpeechToText.ts';
 import textToSpeech from '@utils/textToSpeech.ts';
 import FunctionCallingPromptAPI from './functionCallingPromptAPI/FunctionCallingPromptAPI.ts';
 import { Message } from './functionCallingPromptAPI/types.ts';
+import Benz from './webBluetoothCar/Benz.ts';
 
 export enum Status {
   IDLE = 'idle',
@@ -25,6 +26,8 @@ export interface Brain {
   setup: () => Promise<void>;
   createListener: () => Listener;
   generateAnswer: (text: string) => Promise<Message>;
+  connectBleCar: () => Promise<void>;
+  bleCarConnected: boolean;
 }
 
 const useBrain = (
@@ -33,11 +36,40 @@ const useBrain = (
 ): Brain => {
   const [status, setStatus] = React.useState<Status>(Status.IDLE);
   const llmInstance = React.useMemo(() => new FunctionCallingPromptAPI(), []);
+  const benzInstance = React.useMemo(() => new Benz(), []);
+
+  const bleCarConnected = React.useSyncExternalStore(
+    (cb) => benzInstance.onConnectedChanged(cb),
+    () => benzInstance.connected
+  );
 
   const messages = React.useSyncExternalStore(
     (cb) => llmInstance.onMessagesChanged(cb),
     () => llmInstance.messages
   );
+
+  const runMove = (speed: number): number => {
+    const boundarySpeed = speed < -100 ? -100 : speed > 100 ? 100 : speed;
+    adjustSpeed(boundarySpeed);
+    benzInstance.changeSpeed(boundarySpeed);
+    return boundarySpeed;
+  };
+
+  const runTurn = (direction: number) => {
+    const boundaryDirection =
+      direction < -90 ? -90 : direction > 90 ? 90 : direction;
+    adjustDirection(boundaryDirection);
+    benzInstance.changeTurn(boundaryDirection);
+    return boundaryDirection;
+  };
+
+  const connectBleCar = async (): Promise<void> => {
+    try {
+      await benzInstance.connect();
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const setup = async (callback: any = () => {}): Promise<void> => {
     setStatus(Status.LOADING);
@@ -69,11 +101,7 @@ const useBrain = (
           parameter: -100,
         },
       ],
-      run: (speed) => {
-        const boundrySpeed = speed < -100 ? -100 : speed > 100 ? 100 : speed;
-        adjustSpeed(boundrySpeed);
-        return boundrySpeed;
-      },
+      run: runMove,
     });
 
     llmInstance.registerFunction<number>({
@@ -103,12 +131,7 @@ const useBrain = (
           parameter: 0,
         },
       ],
-      run: (direction: number) => {
-        const boundryDirection =
-          direction < -90 ? -90 : direction > 90 ? 90 : direction;
-        adjustDirection(boundryDirection);
-        return boundryDirection;
-      },
+      run: runTurn,
     });
     await llmInstance.initializeSession(
       callback,
@@ -157,6 +180,8 @@ const useBrain = (
     setup,
     createListener,
     generateAnswer,
+    connectBleCar,
+    bleCarConnected,
   };
 };
 
